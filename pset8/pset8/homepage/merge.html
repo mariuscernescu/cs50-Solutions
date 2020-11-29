@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="styles.css" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="selection.html">Selection Sort</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="insertion.html">Insertion Sort</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="merge.html">Merge Sort</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <div class="text">
+      <h1 class="title">Merge Sort</h1>
+      <p>
+        Like QuickSort, Merge Sort is a Divide and Conquer algorithm. It divides
+        the input array into two halves, calls itself for the two halves, and
+        then merges the two sorted halves. The merge() function is used for
+        merging two halves. The merge(arr, l, m, r) is a key process that
+        assumes that arr[l..m] and arr[m+1..r] are sorted and merges the two
+        sorted sub-arrays into one. See the following C implementation for
+        details.
+      </p>
+    </div>
+
+    <pre class="text"><code
+      >MergeSort(arr[], l, r) 
+      If <var> r </var> > <var> l</var>
+      1. Find the middle point to divide the array into two halves: 
+      middle <var>  m = (l+r)/2</var>
+      2. Call mergeSort for first half: 
+      Call <var> mergeSort(arr, l, m)</var>
+      3. Call mergeSort for second half:
+      Call <var> mergeSort(arr, m+1, r)</var>
+      4. Merge the two halves sorted in step 2 and 3:
+      Call <var> merge(arr, l, m, r)</var></code
+    ></pre>
+
+    <div class="text">
+      <p>
+        The following diagram from wikipedia shows the complete merge sort
+        process for an example array {38, 27, 43, 3, 9, 82, 10}. If we take a
+        closer look at the diagram, we can see that the array is recursively
+        divided in two halves till the size becomes 1. Once the size becomes 1,
+        the merge processes come into action and start merging arrays back till
+        the complete array is merged.
+      </p>
+
+      <img
+        src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/Merge-Sort-Tutorial.png"
+        alt="image showing a diagram with the merge sort algorithm"
+      />
+    </div>
+
+    <h5 class="sub-title">You can also watch the following video:</h5>
+    <div class="video">
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/4VqmGXwpLqc"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <footer>
+      For the full article visit
+      <a
+        href="https://www.geeksforgeeks.org/sorting-algorithms/#algo"
+        target="_blank"
+        >Geeksforgeeks</a
+      >
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

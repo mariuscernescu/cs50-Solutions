@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="styles.css" rel="stylesheet" />
+    <title>Sorting algorithms</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="selection.html">Selection Sort</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="insertion.html">Insertion Sort</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="merge.html">Merge Sort</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <button id="blink">Try Me!</button>
+    <h1 class="title">Sorting algorithms</h1>
+
+    <div class="text">
+      <p>
+        A Sorting Algorithm is used to rearrange a given array or list elements
+        according to a comparison operator on the elements. The comparison
+        operator is used to decide the new order of element in the respective
+        data structure. For example: The below list of characters is sorted in
+        increasing order of their ASCII values. That is, the character with
+        lesser ASCII value will be placed first than the character with higher
+        ASCII value.
+      </p>
+      <img
+        src="https://www.miltonmarketing.com/wp-content/uploads/2018/11/70d6f4e10e2badb5ef394f00c17ad2bc1c14f6e7-min-800x450.jpg"
+        alt="Sorting picture"
+      />
+
+      <h2 class="title"><b> Bubble Sort </b></h2>
+      <p>
+        Bubble Sort is the simplest sorting algorithm that works by repeatedly
+        swapping the adjacent elements if they are in wrong order.
+      </p>
+    </div>
+
+    <div class="text">
+      <h3 class="sub-title"><i> Example:</i></h3>
+      <h4 class="sub-title">First Pass:</h4>
+
+      <pre><code
+      > <var>     ( 5 1 4 2 8 ) –> ( 1 5 4 2 8 ), Here, algorithm compares the first two
+      elements, and swaps since 5 > 1. 
+      ( 1 5 4 2 8 ) –> ( 1 4 5 2 8 ), Swap since 5 > 4 
+      ( 1 4 5 2 8 ) –> ( 1 4 2 5 8 ), Swap since 5 > 2 
+      ( 1 4 2 5 8 ) –> ( 1 4 2 5 8 ), Now, since these elements are already in
+      order (8 > 5), algorithm does not swap them. </var>
+    </code></pre>
+      <h4>Second Pass:</h4>
+
+      <pre><code
+      > <var>   
+          
+      ( 1 4 2 5 8 ) –> ( 1 4 2 5 8 ) 
+      ( 1 4 2 5 8 ) –> ( 1 2 4 5 8 ), Swap since 4 > 2 
+      ( 1 2 4 5 8 ) –> ( 1 2 4 5 8 ) 
+      ( 1 2 4 5 8 ) –> ( 1 2 4 5 8 ) </var> 
+      Now, the array is already sorted, but our algorithm does not know if it is
+      completed. The algorithm needs one whole pass without any swap to know it
+      is sorted.
+    </code></pre>
+      <h4>Third Pass:</h4>
+      <pre><code
+      > <var> 
+          
+      ( 1 2 4 5 8 ) –> ( 1 2 4 5 8 ) 
+      ( 1 2 4 5 8 ) –> ( 1 2 4 5 8 ) 
+      ( 1 2 4 5 8 ) –> ( 1 2 4 5 8 ) 
+      ( 1 2 4 5 8 ) –> ( 1 2 4 5 8 )</var>
+    </code></pre>
+
+      <div class="text">
+        <h5 class="sub-title">You can also watch the following video:</h5>
+        <div class="video">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/xli_FI7CuzA"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      For the full article visit
+      <a
+        href="https://www.geeksforgeeks.org/sorting-algorithms/#algo"
+        target="_blank"
+        >Geeksforgeeks</a
+      >
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+    <script src="color.js"></script>
+  </body>
+</html>

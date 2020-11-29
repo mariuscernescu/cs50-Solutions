@@ -1,0 +1,64 @@
+body {
+  background-color: rgb(248, 248, 248);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#navbarText {
+  font-size: 1.5rem;
+}
+
+.title {
+  text-align: center;
+  margin: 6rem 0 2rem 0;
+  padding: 1rem;
+}
+
+.text {
+  background-color: rgb(236, 235, 235);
+  margin: 4rem;
+  border-radius: 2%;
+  padding: 1rem;
+  font-size: 1.1rem;
+}
+
+p {
+  font-size: 1.5rem;
+}
+
+iframe {
+  display: block;
+  margin: 0 auto;
+  padding: 1.2rem;
+  margin-top: 1rem;
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+}
+
+.sub-title {
+  text-align: left;
+  margin: 1.5rem;
+  padding: 1rem;
+  font-size: 1.5rem;
+}
+
+#blink {
+  display: block;
+  margin: 0 0 0 85%;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
+.red {
+  background-color: rgb(196, 61, 61);
+}
+
+.blue {
+  background-color: rgb(73, 73, 206);
+}
+
+.green {
+  background-color: rgb(153, 202, 78);
+}
