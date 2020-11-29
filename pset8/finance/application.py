@@ -18,12 +18,15 @@ app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 # Ensure responses aren't cached
+
+
 @app.after_request
 def after_request(response):
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
     response.headers["Expires"] = 0
     response.headers["Pragma"] = "no-cache"
     return response
+
 
 # Custom filter
 app.jinja_env.filters["usd"] = usd
@@ -47,7 +50,7 @@ if not os.environ.get("API_KEY"):
 def index():
     """Show portfolio of stocks"""
     # Display a table with all the curent user's stocks,the number of shares
-     # of each, the curent price of each stock, and the total value of each holding
+    # of each, the curent price of each stock, and the total value of each holding
     # Display de user's current cash balance.
 
     user_id = session["user_id"]
@@ -61,7 +64,7 @@ def index():
     cash_int = data[0]['cash']
 
     symbols = {}
-    total_amount = 0;
+    total_amount = 0
     for row in shares:
         data1 = lookup(row['symbol'])
         symbol = data1['symbol']
@@ -95,18 +98,22 @@ def buy():
         name = data['name']
         price = data['price']
         user_id = session["user_id"]
-        data_cash = db.execute('SELECT cash FROM users WHERE id = :user_id', user_id=user_id)
+        data_cash = db.execute(
+            'SELECT cash FROM users WHERE id = :user_id', user_id=user_id)
         for cash in data_cash:
             amount = cash['cash']
             if amount < (int(shares) * price):
                 return apology("Insuficient Founds")
             else:
                 if not db.execute("SELECT * FROM shares WHERE id=:id AND symbol=:symbol", id=user_id, symbol=symbol):
-                    db.execute("INSERT INTO shares (id, symbol, amount, name) VALUES (:id, :symbol, :amount, :name)", id=user_id, symbol=symbol, amount=shares, name=name)
+                    db.execute("INSERT INTO shares (id, symbol, amount, name) VALUES (:id, :symbol, :amount, :name)",
+                               id=user_id, symbol=symbol, amount=shares, name=name)
                 else:
-                    db.execute("UPDATE shares SET amount=amount+:more WHERE symbol=:symbol AND id=:id", more=shares, symbol=symbol, id=user_id)
+                    db.execute("UPDATE shares SET amount=amount+:more WHERE symbol=:symbol AND id=:id",
+                               more=shares, symbol=symbol, id=user_id)
                 money_left = amount - round(int(shares) * price)
-                db.execute("UPDATE users SET cash =:amount WHERE id=:id", amount=money_left, id=user_id)
+                db.execute("UPDATE users SET cash =:amount WHERE id=:id",
+                           amount=money_left, id=user_id)
 
     return redirect('/')
 
@@ -191,8 +198,6 @@ def quote():
         return render_template('quoted.html', display=display)
 
 
-
-
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
@@ -217,7 +222,8 @@ def register():
                 return apology("User already registered", 888)
         else:
             pHash = generate_password_hash(password, salt_length=8)
-            db.execute("INSERT INTO users (username, hash) VALUES (:username, :pHash)", username=username, pHash=pHash )
+            db.execute("INSERT INTO users (username, hash) VALUES (:username, :pHash)",
+                       username=username, pHash=pHash)
             return redirect("/login")
 
 
@@ -234,7 +240,6 @@ def sell():
     symbol = request.form.get("symbol")
     shares = request.form.get("shares")
 
-
     for row in data:
         symbols.append(row['symbol'])
 
@@ -244,19 +249,20 @@ def sell():
         for row in data:
             if symbol in row['symbol']:
                 if int(shares) <= row['amount']:
-                    db.execute("UPDATE shares SET amount = amount - :shares WHERE id=:id AND symbol = :symbol", shares=shares, id=user_id, symbol=symbol)
+                    db.execute("UPDATE shares SET amount = amount - :shares WHERE id=:id AND symbol = :symbol",
+                               shares=shares, id=user_id, symbol=symbol)
                     price = lookup(symbol)
                     amount = int(price['price']) * int(shares)
-                    db.execute("UPDATE users SET cash = cash + :amount WHERE id=:id",amount=amount, id=user_id)
+                    db.execute(
+                        "UPDATE users SET cash = cash + :amount WHERE id=:id", amount=amount, id=user_id)
                 else:
                     return apology("Insuficient Shares", 888)
-
-
 
     else:
         return render_template('sell.html', symbols=symbols)
 
     return redirect("/")
+
 
 def errorhandler(e):
     """Handle error"""

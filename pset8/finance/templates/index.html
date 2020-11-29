@@ -1,52 +1,39 @@
-{% extends "layout.html" %}
-
-{% block title %}
-    Registration Form
-{% endblock %}
-
+{% extends "layout.html" %} {% block title %} Registration Form {% endblock %}
 {% block main %}
 
-        <table style="width:100%">
-            <tr>
-                <th>Symbol</th>
-                <th>Name</th>
-                <th>Shares</th>
-                <th>Price</th>
-                <th>Total</th>
-            </tr>
+<table style="width: 100%">
+  <tr>
+    <th>Symbol</th>
+    <th>Name</th>
+    <th>Shares</th>
+    <th>Price</th>
+    <th>Total</th>
+  </tr>
 
-            {% for i in range(length) %}
-            <tr>
+  {% for i in range(length) %}
+  <tr>
+    <td>{{ shares[i]['symbol'] }}</td>
+    <td>{{ shares[i]['name'] }}</td>
+    <td>{{ shares[i]['amount'] }}</td>
+    <td>${{ shares[i]['price'] }}</td>
+    <td>${{ shares[i]['price'] * shares[i]['amount'] }}</td>
 
-                <td> {{ shares[i]['symbol'] }} </td>
-                <td> {{ shares[i]['name'] }} </td>
-                <td> {{ shares[i]['amount'] }} </td>
-                <td> ${{ shares[i]['price'] }}</td>
-                <td> ${{ shares[i]['price'] * shares[i]['amount'] }} </td>
-
-
-                    {% endfor %}
-
-            </tr>
-            <tr>
-                <td>CASH</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td> {{ cash }}</td>
-
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td> {{ total }} </td>
-            </tr>
-
-        </table>
-
-
-
+    {% endfor %}
+  </tr>
+  <tr>
+    <td>CASH</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>{{ cash }}</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>{{ total }}</td>
+  </tr>
+</table>
 
 {% endblock %}

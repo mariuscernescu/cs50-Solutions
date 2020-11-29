@@ -1,21 +1,21 @@
-{% extends "layout.html" %}
+{% extends "layout.html" %} {% block title %} Buy {% endblock %} {% block main
+%}
+<form action="/sell" method="post">
+  <select name="symbol" class="form-control">
+    {% for symbol in symbols %}
+    <option name="data" value="{{ symbol }}">{{ symbol }}</option>
+    {% endfor %}
+  </select>
+  <div class="form-group">
+    <input
+      class="form-control"
+      name="shares"
+      placeholder="Shares"
+      type="number"
+    />
+  </div>
 
-{% block title %}
-    Buy
-{% endblock %}
-
-{% block main %}
-        <form action="/sell" method="post" >
-            <select name="symbol" class="form-control">
-                {% for symbol in symbols %}
-                    <option name="data" value="{{ symbol }}">{{ symbol }}</option>
-                {% endfor %}
-            </select>
-            <div class="form-group">
-                <input class="form-control" name="shares" placeholder="Shares" type="number">
-            </div>
-
-            <button class="btn btn-primary" type="submit">Sell</button>
-        </form>
+  <button class="btn btn-primary" type="submit">Sell</button>
+</form>
 
 {% endblock %}

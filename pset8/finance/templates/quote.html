@@ -1,17 +1,16 @@
-{% extends "layout.html" %}
-
-{% block title %}
-    Registration Form
-{% endblock %}
-
+{% extends "layout.html" %} {% block title %} Registration Form {% endblock %}
 {% block main %}
-        <form action="/quote" method="post">
-            <div class="form-group">
-                <input class="form-control" name="symbol" placeholder="Symbol" type="text">
-            </div>
+<form action="/quote" method="post">
+  <div class="form-group">
+    <input
+      class="form-control"
+      name="symbol"
+      placeholder="Symbol"
+      type="text"
+    />
+  </div>
 
-            <button class="btn btn-primary" type="submit">Quote</button>
-        </form>
-
+  <button class="btn btn-primary" type="submit">Quote</button>
+</form>
 
 {% endblock %}
