@@ -1,7 +1,7 @@
-{% extends "layout.html" %} {% block title %} Registration Form {% endblock %}
-{% block main %}
+{% extends "layout.html" %} {% block title %} Index {% endblock %} {% block main
+%}
 
-<table style="width: 100%">
+<table class="table table-striped">
   <tr>
     <th>Symbol</th>
     <th>Name</th>
@@ -15,8 +15,8 @@
     <td>{{ shares[i]['symbol'] }}</td>
     <td>{{ shares[i]['name'] }}</td>
     <td>{{ shares[i]['amount'] }}</td>
-    <td>${{ shares[i]['price'] }}</td>
-    <td>${{ shares[i]['price'] * shares[i]['amount'] }}</td>
+    <td>{{ shares[i]['price'] }}</td>
+    <td>{{ shares[i]['value']}}</td>
 
     {% endfor %}
   </tr>
@@ -28,7 +28,7 @@
     <td>{{ cash }}</td>
   </tr>
   <tr>
-    <td></td>
+    <td>TOTAL</td>
     <td></td>
     <td></td>
     <td></td>

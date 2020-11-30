@@ -1,5 +1,6 @@
 import os
 
+import datetime
 from jinja2 import Template
 from collections import defaultdict
 from cs50 import SQL
@@ -74,6 +75,10 @@ def index():
         total_amount += (row['price'] * row['amount'])
 
     total_amount = usd(total_amount + cash_int)
+    for row in shares:
+        row['value'] = usd(row['price'] * row['amount'])
+        row['price'] = usd(row['price'])
+
     return render_template("index.html", shares=shares, cash=cash, length=lengthS, symbol=symbols, total=total_amount)
 
 
@@ -100,6 +105,8 @@ def buy():
         user_id = session["user_id"]
         data_cash = db.execute(
             'SELECT cash FROM users WHERE id = :user_id', user_id=user_id)
+        date = datetime.datetime.now()
+        print(date)
         for cash in data_cash:
             amount = cash['cash']
             if amount < (int(shares) * price):
@@ -114,6 +121,8 @@ def buy():
                 money_left = amount - round(int(shares) * price)
                 db.execute("UPDATE users SET cash =:amount WHERE id=:id",
                            amount=money_left, id=user_id)
+                db.execute("INSERT INTO history (id, symbol, amount, price, DateCreated) VALUES (:id, :symbol, :amount, :price, :date )",
+                           id=user_id, symbol=symbol, amount=shares, price=price, date=date)
 
     return redirect('/')
 
@@ -122,7 +131,13 @@ def buy():
 @login_required
 def history():
     """Show history of transactions"""
-    return apology("TODO")
+    user_id = session["user_id"]
+    data = db.execute("SELECT * FROM history WHERE id=:id", id=user_id)
+    for row in data:
+        row['price'] = usd(row['price'])
+    print(data)
+
+    return render_template("history.html", data=data)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -187,12 +202,12 @@ def quote():
         symbol = request.form.get("symbol")
 
         if not symbol:
-            return apology("TODO", 111)
+            return apology("The symbol is not valid")
 
         data = lookup(symbol)
 
         if data == None:
-            return apology("TODO", 222)
+            return apology("The symbol is not valid")
 
         display = f"A share of {data['name']} ({data['symbol']}) costs {usd(data['price'])}"
         return render_template('quoted.html', display=display)
@@ -240,6 +255,8 @@ def sell():
     symbol = request.form.get("symbol")
     shares = request.form.get("shares")
 
+    dateNow = datetime.datetime.now()
+
     for row in data:
         symbols.append(row['symbol'])
 
@@ -249,12 +266,17 @@ def sell():
         for row in data:
             if symbol in row['symbol']:
                 if int(shares) <= row['amount']:
+                    shareNeg = - int(shares)
+                    print(shareNeg)
                     db.execute("UPDATE shares SET amount = amount - :shares WHERE id=:id AND symbol = :symbol",
                                shares=shares, id=user_id, symbol=symbol)
                     price = lookup(symbol)
                     amount = int(price['price']) * int(shares)
                     db.execute(
                         "UPDATE users SET cash = cash + :amount WHERE id=:id", amount=amount, id=user_id)
+                    db.execute("INSERT INTO history (id, symbol, amount, price, DateCreated) VALUES (:id, :symbol, :amount, :price, :date )",
+                               id=user_id, symbol=symbol, amount=shareNeg, price=(price['price']), date=dateNow)
+                    db.execute("DELETE FROM shares WHERE amount = 0")
                 else:
                     return apology("Insuficient Shares", 888)
 
