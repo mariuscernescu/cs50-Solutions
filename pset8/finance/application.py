@@ -103,8 +103,7 @@ def buy():
         name = data['name']
         price = data['price']
         user_id = session["user_id"]
-        data_cash = db.execute(
-            'SELECT cash FROM users WHERE id = :user_id', user_id=user_id)
+        data_cash = db.execute('SELECT cash FROM users WHERE id = :user_id', user_id=user_id)
         date = datetime.datetime.now()
         print(date)
         for cash in data_cash:
@@ -119,8 +118,7 @@ def buy():
                     db.execute("UPDATE shares SET amount=amount+:more WHERE symbol=:symbol AND id=:id",
                                more=shares, symbol=symbol, id=user_id)
                 money_left = amount - round(int(shares) * price)
-                db.execute("UPDATE users SET cash =:amount WHERE id=:id",
-                           amount=money_left, id=user_id)
+                db.execute("UPDATE users SET cash =:amount WHERE id=:id", amount=money_left, id=user_id)
                 db.execute("INSERT INTO history (id, symbol, amount, price, DateCreated) VALUES (:id, :symbol, :amount, :price, :date )",
                            id=user_id, symbol=symbol, amount=shares, price=price, date=date)
 
@@ -237,8 +235,7 @@ def register():
                 return apology("User already registered", 888)
         else:
             pHash = generate_password_hash(password, salt_length=8)
-            db.execute("INSERT INTO users (username, hash) VALUES (:username, :pHash)",
-                       username=username, pHash=pHash)
+            db.execute("INSERT INTO users (username, hash) VALUES (:username, :pHash)", username=username, pHash=pHash)
             return redirect("/login")
 
 
@@ -272,8 +269,7 @@ def sell():
                                shares=shares, id=user_id, symbol=symbol)
                     price = lookup(symbol)
                     amount = int(price['price']) * int(shares)
-                    db.execute(
-                        "UPDATE users SET cash = cash + :amount WHERE id=:id", amount=amount, id=user_id)
+                    db.execute("UPDATE users SET cash = cash + :amount WHERE id=:id", amount=amount, id=user_id)
                     db.execute("INSERT INTO history (id, symbol, amount, price, DateCreated) VALUES (:id, :symbol, :amount, :price, :date )",
                                id=user_id, symbol=symbol, amount=shareNeg, price=(price['price']), date=dateNow)
                     db.execute("DELETE FROM shares WHERE amount = 0")
@@ -283,6 +279,19 @@ def sell():
     else:
         return render_template('sell.html', symbols=symbols)
 
+    return redirect("/")
+
+
+@app.route("/add", methods=["GET", "POST"])
+@login_required
+def add():
+    user_id = session["user_id"]
+    amount = request.form.get('amount')
+    if not amount or int(amount) < 1:
+        return apology("You have to enter a valid value", 888)
+    else:
+        db.execute("UPDATE users SET cash = cash + :amount WHERE id=:id", amount=amount, id=user_id)
+        print(amount)
     return redirect("/")
 
 
