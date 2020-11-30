@@ -35,5 +35,13 @@
     <td>{{ total }}</td>
   </tr>
 </table>
+<form action="/add" method="post">
+  <p>Add more cash</p>
+  <div class="form-group">
+    <input class="form-control" name="amount" placeholder="$$$" type="number" />
+  </div>
+
+  <button class="btn btn-primary" type="submit">Add $</button>
+</form>
 
 {% endblock %}
