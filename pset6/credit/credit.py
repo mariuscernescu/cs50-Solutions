@@ -1,6 +1,6 @@
 from cs50 import get_string
 
-card = get_string("Number: ") #Get CC Nr.
+card = get_string("Number: ")  # Get CC Nr.
 
 reverseCard = [int(x) for x in card[::-1]]
 listDouble = list()
@@ -18,6 +18,7 @@ for index, digit in digits:
 
     cardLen = [13, 15, 16]
 
+# If sum is invalid
 if not sum(listDouble) % 10 == 0 or len(card) not in cardLen:
     print("INVALID")
     exit(0)
@@ -33,7 +34,3 @@ elif len(card) == 16 and card[:1] == '4' or len(card) == 13 and card[:1] == '4':
     print("VISA")
 else:
     print("INVALID")
-
-
-
-
